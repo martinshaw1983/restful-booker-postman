@@ -1,0 +1,49 @@
+name: Automated API Testing
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  test-api:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out repository code
+      uses: actions/checkout@v4
+
+    - name: Set up Node.js environment
+      uses: actions/setup@v4
+      with:
+        node-version: '18'
+
+    - name: Install Newman
+      run: npm install -g newman
+
+    - name: Run Postman Collection
+      run: |
+        newman run restful-booker-happy-path-collection.json \
+          -e restful-booker-postman-environment.json \
+          --env-var "username=${{ secrets.BOOKING_USER }}" \
+          --env-var "password=${{ secrets.BOOKING_PASSWORD }}" \
+          --reporters cli
+
+    - name: Send Email Notification
+      uses: dawidd6/action-send-mail@v4
+      if: always() # This ensures the email sends even if a test fails
+      with:
+        server_address: ${{ secrets.SMTP_SERVER }}
+        server_port: ${{ secrets.SMTP_PORT }}
+        username: ${{ secrets.SMTP_USERNAME }}
+        password: ${{ secrets.SMTP_PASSWORD }}
+        subject: 'Postman API Test Run: ${{ job.status }}'
+        to: mr.mp.shaw.1983@gmail.com
+        from: Postman Automation Bot <mr.mp.shaw.1983@gmail.com>
+        secure: true
+        content_type: text/html
+        html_body: |
+          <p>Postman API Test Suite execution completed with status: <strong>${{ job.status }}</strong></p>
+          <p>Triggered by event: <strong>${{ github.event_name }}</strong></p>

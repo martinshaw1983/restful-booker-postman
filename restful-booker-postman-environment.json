@@ -1,0 +1,70 @@
+{
+	"id": "496eb198-fe8e-4ab1-b5a2-ac1d832b404e",
+	"name": "Restful Booker",
+	"values": [
+		{
+			"key": "bookingId",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "authToken",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "firstName",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "lastName",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "checkIn",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "checkOut",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "sharedUtils",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "updatedBooking",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "username",
+			"value": "placeholder_user",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "password",
+			"value": "placeholder_password",
+			"type": "default",
+			"enabled": true
+		}
+	],
+	"color": null,
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2026-05-17T10:08:39.050Z",
+	"_postman_exported_using": "Postman/12.10.5"
+}
