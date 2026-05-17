@@ -30,15 +30,16 @@ jobs:
           --env-var "username=${{ secrets.BOOKING_USER }}" \
           --env-var "password=${{ secrets.BOOKING_PASSWORD }}" \
           --reporters cli,text \
-          --reporter-text-export test-results.txt
+          --reporter-text-export ./test-results.txt
     
     - name: Read Test Results
       id: results
       if: always()
       run: |
-        cat test-results.txt
+        ls -la
+        cat ./test-results.txt || echo "No results file found"
         echo "SUMMARY<<EOF" >> $GITHUB_ENV
-        cat test-results.txt >> $GITHUB_ENV
+        cat ./test-results.txt >> $GITHUB_ENV || echo "No summary data" >> $GITHUB_ENV
         echo "EOF" >> $GITHUB_ENV
 
     - name: Send Email Notification
