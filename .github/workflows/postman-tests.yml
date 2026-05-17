@@ -25,8 +25,8 @@ jobs:
 
     - name: Run Postman Collection
       run: |
-        newman run restful-booker-postman-happy-path-collection..json \
-          -e restful-booker-postman-happy-path-collection..json \
+        newman run restful-booker-postman-happy-path-collection.json \
+          -e restful-booker-postman-happy-path-collection.json \
           --env-var "username=${{ secrets.BOOKING_USER }}" \
           --env-var "password=${{ secrets.BOOKING_PASSWORD }}" \
           --reporters cli,text \
@@ -43,7 +43,7 @@ jobs:
 
     - name: Send Email Notification
       uses: dawidd6/action-send-mail@v4
-      if: always() # This ensures the email sends even if a test fails
+      if: always() 
       with:
         server_address: ${{ secrets.SMTP_SERVER }}
         server_port: ${{ secrets.SMTP_PORT }}
@@ -55,12 +55,11 @@ jobs:
         secure: true
         content_type: text/html
         html_body: |
-          <p>Postman API Test Suite execution completed with status: ${{ job.status }}</strong></p>
+          <p>Postman API Test Suite execution completed with status: <strong>${{ job.status }}</strong></p>
           
-          <p>==================================================
-          DETAILED NEWMAN EXECUTION SUMMARY:
-          ==================================================
+          <p><strong>DETAILED NEWMAN EXECUTION SUMMARY:</strong></p>
+          <pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; font-family: monospace;">
           ${{ env.SUMMARY }}
-          </a></p>
+          </pre>
           
-          <p>Triggered by event: <strong>${{ github.event_name }}</strong> by <strong>${{ github.actor }}</strong> on branch ${{ github.head_ref || github.ref_name }}.</p>
+          <p>Triggered by event: <strong>${{ github.event_name }}</strong> by <strong>${{ github.actor }}</strong> on branch <strong>${{ github.head_ref || github.ref_name }}</strong>.</p>
