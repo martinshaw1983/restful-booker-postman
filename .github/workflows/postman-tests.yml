@@ -26,7 +26,7 @@ jobs:
     - name: Run Postman Collection
       run: |
         newman run restful-booker-postman-happy-path-collection.json \
-          -e restful-booker-postman-collection.json \
+          -e restful-booker-postman-environment.json \
           --env-var "username=${{ secrets.BOOKING_USER }}" \
           --env-var "password=${{ secrets.BOOKING_PASSWORD }}" \
           --reporters cli,text \
