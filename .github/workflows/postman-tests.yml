@@ -56,7 +56,7 @@ jobs:
         secure: true
         content_type: text/html
         html_body: |
-          <p>Postman API Test Suite execution completed with status: <strong>${{ job.status }}</strong></p>
+          <p>Postman API test suite execution completed with status: <strong>${{ job.status }}</strong></p>
           
           <p><strong>DETAILED NEWMAN EXECUTION SUMMARY:</strong></p>
           <pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; font-family: monospace;">
