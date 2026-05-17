@@ -21,7 +21,7 @@ jobs:
         node-version: '18'
 
     - name: Install Newman
-      run: npm install -g newman
+      run: npm install -g newman newman-reporter-text
 
     - name: Run Postman Collection
       run: |
